@@ -1,4 +1,5 @@
 import {List,Map} from 'immutable';
+export const INITIAL_STATE = Map();
 
 // We need to convert the Javascript array into an Imutable List.
 
@@ -22,7 +23,7 @@ export function vote(state, entry){
 }
 
  function getWinners(vote) {
-  if (!vote) return [];
+  if (!vote) return []; // Vote was not defined
   const [a, b] = vote.get('pair');
   const aVotes = vote.getIn(['tally', a], 0);
   const bVotes = vote.getIn(['tally', b], 0);

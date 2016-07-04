@@ -106,54 +106,36 @@ describe('next', () => {
 describe('vote', () => {
 
     it('creates a tally for the voted entry', () => {
-    // 2 elements to vote for, and an empty list of entries.
-      const state = Map({
-        vote: Map({
-          pair: List.of('Trainspotting', '28 Days Later')
-        }),
-        entries: List()
-      });
-
-      // Same object as before but with a new element in vote: tally.
-      const nextState = vote(state, 'Trainspotting');
-      expect(nextState).to.equal(Map({
-        vote: Map({
-          pair: List.of('Trainspotting', '28 Days Later'),
-          tally: Map({
-            'Trainspotting': 1
-          })
-        }),
-        entries: List()
-      }));
+    const state = Map({
+      pair: List.of('Trainspotting', '28 Days Later')
     });
+    const nextState = vote(state, 'Trainspotting')
+    expect(nextState).to.equal(Map({
+      pair: List.of('Trainspotting', '28 Days Later'),
+      tally: Map({
+        'Trainspotting': 1
+      })
+    }));
+  });
 
     // This time we do the same thing but with a tally element already existing.
     it('adds to existing tally for the voted entry', () => {
-      const state = Map({
-        vote: Map({
-          pair: List.of('Trainspotting', '28 Days Later'),
-          tally: Map({
-            'Trainspotting': 3,
-            '28 Days Later': 2
-          })
-        }),
-        entries: List()
-      });
-
-      // We apply the vote method on the Map again specifying
-      // which element in the tally we want to increment.
-      const nextState = vote(state, 'Trainspotting');
-      expect(nextState).to.equal(Map({
-        vote: Map({
-          pair: List.of('Trainspotting', '28 Days Later'),
-          tally: Map({
-            'Trainspotting': 4,
-            '28 Days Later': 2
-          })
-        }),
-        entries: List()
-      }));
+    const state = Map({
+      pair: List.of('Trainspotting', '28 Days Later'),
+      tally: Map({
+        'Trainspotting': 3,
+        '28 Days Later': 2
+      })
     });
+    const nextState = vote(state, 'Trainspotting');
+    expect(nextState).to.equal(Map({
+      pair: List.of('Trainspotting', '28 Days Later'),
+      tally: Map({
+        'Trainspotting': 4,
+        '28 Days Later': 2
+      })
+    }));
+  });
 
 
 

@@ -13,14 +13,6 @@ export function setEntries(state, entries) {
 //create new Maps in their place. If the value at the end is missing,
 //initialize it with 0.
 // (!!!)    
-export function vote(state, entry){
-    return state.updateIn(
-        ['vote','tally',entry],
-        0,
-        tally => tally +1
-    );
-    
-}
 
  function getWinners(vote) {
   if (!vote) return []; // Vote was not defined
@@ -45,5 +37,13 @@ export function next(state) {
       entries: entries.skip(2)
     });
   }
+}
+
+export function vote(voteState, entry) {
+  return voteState.updateIn(
+    ['tally', entry],
+    0,
+    tally => tally + 1
+  );
 }
 
